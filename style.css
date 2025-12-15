@@ -34,7 +34,38 @@ input {
   border-radius: 50%;
 }
 
+.user a {
+  color: #5789f4; /* accent color */
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.user a:hover {
+  text-decoration: underline;
+  color: #3b82f6; /* lighter blue on hover */
+}
+
 #status {
   margin: 10px 0;
   color: #94a3b8;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: none;
+  background-color: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #6b7280;
+  cursor: not-allowed;
 }

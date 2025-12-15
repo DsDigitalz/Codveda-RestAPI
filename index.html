@@ -10,14 +10,15 @@
   <div class="container">
     <h1>GitHub User Search</h1>
 
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search GitHub users..."
-    />
+    <input type="text" id="searchInput" placeholder="Search GitHub users..." />
 
     <div id="status"></div>
     <div id="results"></div>
+
+    <div id="pagination" class="pagination">
+      <button id="prevBtn" disabled>Previous</button>
+      <button id="nextBtn" disabled>Next</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
