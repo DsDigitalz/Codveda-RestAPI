@@ -6,10 +6,9 @@
 
   <title>GitHub User Search</title>
 
-  <!-- Preload CSS -->
+  <!-- Preload CSS for faster paint -->
   <link rel="preload" href="style.css" as="style" />
   <link rel="stylesheet" href="style.css" />
-
 </head>
 <body>
   <div class="container">
@@ -31,7 +30,11 @@
     </div>
   </div>
 
-  <!-- Defer JS (removes render-blocking) -->
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+
+  <!-- App JS -->
   <script src="script.js" defer></script>
 </body>
 </html>

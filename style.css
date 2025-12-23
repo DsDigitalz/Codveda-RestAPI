@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: #0f172a;
@@ -12,12 +16,18 @@ body {
   max-width: 400px;
 }
 
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 input {
   width: 100%;
   padding: 10px;
   border-radius: 6px;
   border: none;
   margin-bottom: 15px;
+  outline: none;
 }
 
 .user {
@@ -28,11 +38,12 @@ input {
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 10px;
+  will-change: transform;
 }
 
 .user img {
   width: 40px;
-  height: 40px; /* prevents layout shift */
+  height: 40px;
   border-radius: 50%;
 }
 
@@ -43,13 +54,14 @@ input {
 }
 
 .user a:hover {
-  text-decoration: underline;
   color: #3b82f6;
+  text-decoration: underline;
 }
 
 #status {
   margin: 10px 0;
   color: #94a3b8;
+  text-align: center;
 }
 
 .pagination {
