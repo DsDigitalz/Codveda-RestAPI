@@ -3,16 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>GitHub User Search</title>
+
+  <!-- Preload CSS -->
+  <link rel="preload" href="style.css" as="style" />
   <link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
   <div class="container">
     <h1>GitHub User Search</h1>
 
-    <input type="text" id="searchInput" placeholder="Search GitHub users..." />
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search GitHub users..."
+      autocomplete="off"
+    />
 
-    <div id="status"></div>
+    <div id="status" aria-live="polite"></div>
     <div id="results"></div>
 
     <div id="pagination" class="pagination">
@@ -21,6 +31,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Defer JS (removes render-blocking) -->
+  <script src="script.js" defer></script>
 </body>
 </html>

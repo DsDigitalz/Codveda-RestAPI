@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: #0f172a;
   color: #fff;
   display: flex;
@@ -8,7 +8,8 @@ body {
 }
 
 .container {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 input {
@@ -31,18 +32,19 @@ input {
 
 .user img {
   width: 40px;
+  height: 40px; /* prevents layout shift */
   border-radius: 50%;
 }
 
 .user a {
-  color: #5789f4; /* accent color */
+  color: #5789f4;
   font-size: 16px;
   text-decoration: none;
 }
 
 .user a:hover {
   text-decoration: underline;
-  color: #3b82f6; /* lighter blue on hover */
+  color: #3b82f6;
 }
 
 #status {

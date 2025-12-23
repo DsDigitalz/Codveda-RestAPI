@@ -1,11 +1,3 @@
-// The RestAPI helps the application/browser to send an HTTP/HTTPS GET Request from Github(server). The server then responds by sending back HTTP response to the application or browser
-
-// This means:
-
-// Browser → HTTP GET request → GitHub server
-
-// GitHub server → HTTP response (JSON) → Browser
-
 const searchInput = document.getElementById("searchInput");
 const results = document.getElementById("results");
 const status = document.getElementById("status");
@@ -15,12 +7,12 @@ const nextBtn = document.getElementById("nextBtn");
 let debounceTimer;
 let currentPage = 1;
 let lastQuery = "";
-const perPage = 10; // number of users per page
+const perPage = 5;
 
 // Fetch GitHub users
 async function fetchUsers(query, page = 1) {
   if (!query) {
-    results.innerHTML = "";
+    results.textContent = "";
     status.textContent = "";
     prevBtn.disabled = true;
     nextBtn.disabled = true;
@@ -28,36 +20,48 @@ async function fetchUsers(query, page = 1) {
   }
 
   status.textContent = "Loading...";
-  results.innerHTML = "";
+  results.textContent = "";
 
   try {
     const response = await fetch(
-      `https://api.github.com/search/users?q=${query}&per_page=${perPage}&page=${page}`
+      `https://api.github.com/search/users?q=${encodeURIComponent(
+        query
+      )}&per_page=${perPage}&page=${page}`,
+      { cache: "force-cache" }
     );
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
+    if (!response.ok) throw new Error();
 
     const data = await response.json();
-
     status.textContent = `${data.total_count} users found`;
 
-    // Display users
-    data.items.slice(0, 5).forEach((user) => {
+    const fragment = document.createDocumentFragment();
+
+    data.items.forEach(user => {
       const div = document.createElement("div");
       div.className = "user";
+
       div.innerHTML = `
-        <img src="${user.avatar_url}" />
-        <a href="${user.html_url}" target="_blank">${user.login}</a>
+        <img 
+          src="${user.avatar_url}"
+          alt="${user.login}"
+          loading="lazy"
+          width="40"
+          height="40"
+        />
+        <a href="${user.html_url}" target="_blank" rel="noopener">
+          ${user.login}
+        </a>
       `;
-      results.appendChild(div);
+
+      fragment.appendChild(div);
     });
 
-    // Handle pagination buttons
+    results.appendChild(fragment);
+
     prevBtn.disabled = page === 1;
     nextBtn.disabled = page * perPage >= data.total_count;
-  } catch (error) {
+  } catch {
     status.textContent = "Error fetching users";
     prevBtn.disabled = true;
     nextBtn.disabled = true;
@@ -67,14 +71,15 @@ async function fetchUsers(query, page = 1) {
 // Debounced search
 searchInput.addEventListener("input", () => {
   clearTimeout(debounceTimer);
+
   debounceTimer = setTimeout(() => {
-    currentPage = 1; // reset to first page on new search
+    currentPage = 1;
     lastQuery = searchInput.value.trim();
     fetchUsers(lastQuery, currentPage);
   }, 500);
 });
 
-// Pagination button events
+// Pagination
 prevBtn.addEventListener("click", () => {
   if (currentPage > 1) {
     currentPage--;
